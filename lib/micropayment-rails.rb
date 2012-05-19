@@ -1,0 +1,8 @@
+require 'ostruct'
+require 'micropayment'
+require 'micropayment-rails/setup'
+require 'micropayment-rails/classes/base'
+require 'micropayment-rails/classes/address'
+require 'micropayment-rails/classes/bank_account'
+require 'micropayment-rails/classes/customer'
+require 'micropayment-rails/classes/session'
