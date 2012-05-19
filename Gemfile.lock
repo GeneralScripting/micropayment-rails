@@ -99,10 +99,10 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bundler (~> 1.1.0)
+  bundler (>= 1.0.0)
   jeweler (~> 1.8.3)
   micropayment
-  rails (>= 3.0.0)
+  rails
   rcov
   rdoc (~> 3.12)
   shoulda

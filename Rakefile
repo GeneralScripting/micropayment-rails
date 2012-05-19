@@ -17,8 +17,8 @@ Jeweler::Tasks.new do |gem|
   gem.name = "micropayment-rails"
   gem.homepage = "http://github.com/jeanmartin/micropayment-rails"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.summary = %Q{Rails wrapper for the micropayment gem}
+  gem.description = %Q{Use the micropayment API in your Rails project.}
   gem.email = "jan@general-scripting.com"
   gem.authors = ["Jan Schwenzien"]
   # dependencies defined in Gemfile
