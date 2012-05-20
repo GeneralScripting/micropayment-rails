@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Jan Schwenzien"]
-  s.date = "2012-05-19"
+  s.date = "2012-05-20"
   s.description = "Use the micropayment API in your Rails project."
   s.email = "jan@general-scripting.com"
   s.extra_rdoc_files = [
@@ -38,7 +38,7 @@ Gem::Specification.new do |s|
   s.homepage = "http://github.com/jeanmartin/micropayment-rails"
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
-  s.rubygems_version = "1.8.23"
+  s.rubygems_version = "1.8.22"
   s.summary = "Rails wrapper for the micropayment gem"
 
   if s.respond_to? :specification_version then

@@ -28,11 +28,11 @@ module Micropayment
       when "0"
         self.new( :customerId => customerId, :freeParams => result["freeParams"] )
       else
-        raise "#{result["error"]}: #{result["errorMessage"]}"
+        raise "Customer#find - #{result["error"]}: #{result["errorMessage"]}"
       end
     end
 
-    def self.create(params={})
+    def self.create!(params={})
       params.symbolized_keys!
       bank_account_params = params.delete(:bank_account)
       address_params      = params.delete(:address)
@@ -49,6 +49,12 @@ module Micropayment
       else
         raise "#{result["error"]}: #{result["errorMessage"]}"
       end
+    end
+
+    def self.find_or_create_by_id(id, params={})
+      params.symbolized_keys!
+      obj = (find(id) rescue nil)
+      obj ? obj : create( params.merge(:customerId => id) )
     end
 
     def self.session_list

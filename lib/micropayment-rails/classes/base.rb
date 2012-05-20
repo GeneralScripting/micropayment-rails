@@ -23,7 +23,7 @@ module Micropayment
       end
     end
 
-    def self.create(id, params={})
+    def self.create!(id, params={})
       params.symbolized_keys!
       params.merge!(self::IDENTIFIER => id) if id
       result = Micropayment::Debit.send self::CREATE_METHOD, params
