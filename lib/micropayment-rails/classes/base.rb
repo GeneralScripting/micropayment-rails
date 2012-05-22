@@ -24,18 +24,18 @@ module Micropayment
     end
 
     def self.create!(id, params={})
-      params.symbolized_keys!
+      params.symbolize_keys!
       params.merge!(self::IDENTIFIER => id) if id
       result = Micropayment::Debit.send self::CREATE_METHOD, params
       if result["error"] == "0"
-        self.new( valid_attributes( params.merge(result.symbolized_keys) ) )
+        self.new( valid_attributes( params.merge(result.symbolize_keys) ) )
       else
         raise "#{result["error"]}: #{result["errorMessage"]}"
       end
     end
 
     def self.find_or_create_by_id(id, params={})
-      params.symbolized_keys!
+      params.symbolize_keys!
       obj = (find(id) rescue nil)
       obj ? obj : create( id, params )
     end

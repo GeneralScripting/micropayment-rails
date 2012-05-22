@@ -24,7 +24,7 @@ module Micropayment
     
   
     def update!(params={})
-      params.symbolized_keys!
+      params.symbolize_keys!
       bank_account_params = params.delete(:bank_account)
       address_params      = params.delete(:address)
       update_params = {}.tap do |hsh|
@@ -55,7 +55,7 @@ module Micropayment
     end
 
     def self.create!(params={})
-      params.symbolized_keys!
+      params.symbolize_keys!
       bank_account_params = params.delete(:bank_account)
       address_params      = params.delete(:address)
       create_params = {}.tap do |hsh|
@@ -74,13 +74,13 @@ module Micropayment
     end
 
     def self.find_or_create_by_id(id, params={})
-      params.symbolized_keys!
+      params.symbolize_keys!
       obj = (find(id) rescue nil)
       obj ? obj : create!( params.merge(:customerId => id) )
     end
 
     def self.find_create_or_update_by_id(id, params={})
-      params.symbolized_keys!
+      params.symbolize_keys!
       obj = (find(id) rescue nil)
       obj ? obj.update!(params) : create!( params.merge(:customerId => id) )
     end
