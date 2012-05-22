@@ -7,7 +7,7 @@ module Micropayment
     CREATE_METHOD     = :sessionCreate
 
 
-    def create!(project, customer, params={})
+    def self.create!(project, customer, params={})
       params.symbolize_keys!
       params.merge!( :customerId => customer.id, :project => project )
       result = Micropayment::Debit.sessionCreate( params )

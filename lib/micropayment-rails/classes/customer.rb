@@ -21,6 +21,28 @@ module Micropayment
     end
 
 
+    
+  
+    def update!(params={})
+      params.symbolized_keys!
+      bank_account_params = params.delete(:bank_account)
+      address_params      = params.delete(:address)
+      update_params = {}.tap do |hsh|
+        hsh[:customerId]  = id
+        hsh[:freeParams]  = params
+      end
+      result = Micropayment::Debit.customerSet( update_params )
+      if result["error"] == "0"
+        self.bank_account     = bank_account_params   if bank_account_params
+        self.customer.address = address_params        if address_params
+        self
+      else
+        raise "Customer#update! - #{result["error"]}: #{result["errorMessage"]}"
+      end
+    end
+
+
+
 
     def self.find(customerId)
       result = Micropayment::Debit.customerGet( :customerId => customerId )
@@ -47,14 +69,20 @@ module Micropayment
         customer.address      = address_params        if address_params
         customer
       else
-        raise "#{result["error"]}: #{result["errorMessage"]}"
+        raise "Customer#create! - #{result["error"]}: #{result["errorMessage"]}"
       end
     end
 
     def self.find_or_create_by_id(id, params={})
       params.symbolized_keys!
       obj = (find(id) rescue nil)
-      obj ? obj : create( params.merge(:customerId => id) )
+      obj ? obj : create!( params.merge(:customerId => id) )
+    end
+
+    def self.find_create_or_update_by_id(id, params={})
+      params.symbolized_keys!
+      obj = (find(id) rescue nil)
+      obj ? obj.update!(params) : create!( params.merge(:customerId => id) )
     end
 
     def self.session_list
