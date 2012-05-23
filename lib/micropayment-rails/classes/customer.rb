@@ -5,7 +5,7 @@ module Micropayment
 
 
     def address=(params={})
-      @address = Micropayment::Address.create( id, params )
+      @address = Micropayment::Address.create!( id, params )
     end
 
     def address
@@ -13,7 +13,7 @@ module Micropayment
     end
 
     def bank_account=(params={})
-      @bank_account = Micropayment::BankAccount.create( id, params )
+      @bank_account = Micropayment::BankAccount.create!( id, params )
     end
 
     def bank_account
@@ -64,6 +64,7 @@ module Micropayment
       end
       result = Micropayment::Debit.customerCreate( create_params )
       if result["error"] == "0"
+        create_params[:customerId] ||= result["customerId"]
         customer = self.new( create_params )
         customer.bank_account = bank_account_params   if bank_account_params
         customer.address      = address_params        if address_params

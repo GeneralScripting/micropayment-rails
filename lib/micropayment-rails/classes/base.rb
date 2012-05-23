@@ -8,7 +8,7 @@ module Micropayment
 
 
     def id
-      send self::IDENTIFIER
+      send self.class::IDENTIFIER
     end
 
 
